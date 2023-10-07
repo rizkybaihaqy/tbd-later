@@ -1,4 +1,6 @@
+import { Drive } from "@/lib/deta/drive.js";
 import { Shop } from "@/repositories/shop.js";
+import { revalidateTag } from "next/cache.js";
 import { redirect } from "next/navigation.js";
 
 export default function Setup() {
@@ -16,7 +18,11 @@ export default function Setup() {
       },
     ]);
 
-    if (!shop.failed) {
+    const image = await Drive.put("logo.png", formData.get("logo"));
+
+    if (!shop.failed && image.name) {
+      revalidateTag("shops");
+      revalidateTag("assets");
       redirect("/admin");
     }
   }
@@ -35,6 +41,16 @@ export default function Setup() {
             id="shop-name"
             name="shop-name"
             placeholder="Example: Mi Tienda"
+            required
+          />
+        </label>
+        <label htmlFor="logo">
+          Logo
+          <input
+            type="file"
+            id="logo"
+            name="logo"
+            accept="image/png"
             required
           />
         </label>
