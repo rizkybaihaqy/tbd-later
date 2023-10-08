@@ -1,4 +1,4 @@
-import { DETA_HEADERS, DETA_PROJECT_URL } from "@/config/deta";
+import { DETA_HEADERS, DETA_BASE_URL } from "@/config/deta";
 
 export const Shop = {
   /**
@@ -7,9 +7,10 @@ export const Shop = {
    */
   get: (key) =>
     fetch({
-      url: `${DETA_PROJECT_URL}/shops/items/${key}`,
+      url: `${DETA_BASE_URL}/shops/items/${key}`,
       method: "GET",
       headers: DETA_HEADERS,
+      next: { tags: ["shops"] },
     }).then((res) => res.json()),
 
   /**
@@ -18,9 +19,10 @@ export const Shop = {
    */
   put: (items) =>
     fetch({
-      url: `${DETA_PROJECT_URL}/shops/items`,
+      url: `${DETA_BASE_URL}/shops/items`,
       method: "PUT",
       headers: DETA_HEADERS,
       body: JSON.stringify({ items }),
+      cache: "no-store",
     }).then((res) => res.json()),
 };

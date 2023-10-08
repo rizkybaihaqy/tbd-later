@@ -1,4 +1,5 @@
 import { Shop } from "@/repositories/shop.js";
+import Image from "next/image.js";
 import { redirect } from "next/navigation.js";
 
 export default async function Home() {
@@ -15,7 +16,15 @@ export default async function Home() {
 
   return (
     <main className="container">
-      <h1>{shop.name}</h1>
+      <section>
+        <Image
+          src={"http://localhost:4200/assets/logo.png"}
+          alt="logo"
+          width={100}
+          height={100}
+        />
+        <h1>{shop.name}</h1>
+      </section>
       {menus.map((menu, i) => (
         <div className="grid" key={i}>
           {menu.map((item, j) => (
