@@ -1,4 +1,4 @@
-export default function Admin() {
+export default function DashboardPage() {
   return (
     <main className="container">
       <h1>Admin</h1>
