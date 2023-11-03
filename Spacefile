@@ -6,3 +6,7 @@ micros:
     engine: next
     primary: true
     dev: npm run dev
+    public_routes:
+      - "/"
+      - "_next/static/*"
+      - "/favicon.ico"
