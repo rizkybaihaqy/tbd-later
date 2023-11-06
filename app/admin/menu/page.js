@@ -3,7 +3,7 @@ import { Menu } from "@/repositories/menu.js";
 export default async function Menus() {
   const menu = await Menu.query();
 
-  const grouped = menu.reduce(
+  const grouped = menu.items.reduce(
     (rows, key, index) =>
       (index % 3 == 0 ? rows.push([key]) : rows[rows.length - 1].push(key)) &&
       rows,
@@ -20,9 +20,9 @@ export default async function Menus() {
         ➕ Create Menu
       </a>
       {grouped.map((row, i) => (
-        <section className="grid">
+        <section key={i} className="grid">
           {row.map((menu, j) => (
-            <article key={i}>
+            <article key={j}>
               <h3>{menu.name}</h3>
               <p>{menu.desc}</p>
               <p>{menu.price}</p>

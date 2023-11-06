@@ -1,7 +1,7 @@
-import { Drive } from "@/lib/deta/drive.js";
+import { Shop } from "@/repositories/shop.js";
 
 export async function GET(_, { params }) {
-  const asset = await Drive.get(params.name);
+  const asset = await Shop.download(params.name);
 
   return new Response(asset, {
     status: 200,
