@@ -1,14 +1,21 @@
 /**
- * @typedef {Object} DriveCreatedResponse
- * @property {string} name
- * @property {string} project_id
- * @property {string} drive_name
+ * @typedef {Object} UploadResponse
+ * @property {String} name
+ * @property {String} project_id
+ * @property {String} drive_name
+ * @property {String[]} errors
  */
 
 /**
- * @typedef {Object} DriveListResponse
+ * @typedef {Object} ListResponse
  * @property {Object} paging
- * @property {string} paging.size
- * @property {string} paging.last
- * @property {string[]} names
+ * @property {String} paging.size
+ * @property {String} paging.last
+ * @property {String[]} names
+ */
+
+/**
+ * @typedef {Object} PurgeResponse
+ * @property {String[]} deleted
+ * @property {String[]} failed
  */

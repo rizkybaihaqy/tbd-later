@@ -1,4 +1,3 @@
-import { Drive } from "@/lib/deta/drive.js";
 import { Shop } from "@/repositories/shop.js";
 import { revalidateTag } from "next/cache.js";
 import { redirect } from "next/navigation.js";
@@ -18,7 +17,7 @@ export default function Setup() {
       },
     ]);
 
-    const image = await Drive.put("logo.png", formData.get("logo"));
+    const image = await Shop.upload("logo.png", formData.get("logo"));
 
     if (!shop.failed && image.name) {
       revalidateTag("shops");

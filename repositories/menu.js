@@ -1,6 +1,6 @@
-import { Base } from "@/lib/deta/base.js";
+import { Deta } from "@/lib/deta/index.js";
 
-export const Menu = Base({
+export const Menu = Deta({
   name: "menus",
   property: {
     key: "",
