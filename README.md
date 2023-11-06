@@ -10,11 +10,19 @@
 
 ### Installation
 
-Assuming you already clone this repository, you can install the dependencies by running:
+Assuming you have already cloned this repository, you can install the necessary dependencies by running:
 
 ```bash
 npm install
 ```
+
+Next, create the project in Deta by executing:
+
+```bash
+space new
+```
+
+This will set up the project in your Deta environment.
 
 ### Starting The Development Server
 
