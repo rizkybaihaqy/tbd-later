@@ -1,4 +1,5 @@
 import { Menu } from "@/repositories/menu.js";
+import Link from "next/link.js";
 
 export default async function ListMenusPage() {
   const menu = (await Menu.query()).items.reduce(
@@ -15,9 +16,9 @@ export default async function ListMenusPage() {
         <h2>Menu📝</h2>
         <h3>Manage your menu in this page!</h3>
       </hgroup>
-      <a href={`/admin/menu/create`} role="button" className="primary">
+      <Link href={`/admin/menu/create`} role="button" className="primary">
         ➕ Create Menu
-      </a>
+      </Link>
       {menu.map((row, i) => (
         <section key={i} className="grid">
           {row.map((menu, j) => (

@@ -6,13 +6,13 @@ export default function DashboardPage() {
       <h1>Admin</h1>
       <section className="grid">
         <article>
-          <a href="/admin/menu">Manage Menu 📝</a>
+          <Link href="/admin/menu">Manage Menu 📝</Link>
         </article>
         <article>
-          <a href="/admin/">Manage Tables 🪑</a>
+          <Link href="/admin/">Manage Tables 🪑</Link>
         </article>
         <article>
-          <a href="/admin/">Manage Shop 🏪</a>
+          <Link href="/admin/">Manage Shop 🏪</Link>
         </article>
       </section>
     </main>

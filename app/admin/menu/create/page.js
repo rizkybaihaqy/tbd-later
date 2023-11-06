@@ -1,4 +1,5 @@
 import { Menu } from "@/repositories/menu.js";
+import Link from "next/link.js";
 import { redirect } from "next/navigation.js";
 
 export default function CreateMenuPage() {
@@ -60,7 +61,9 @@ export default function CreateMenuPage() {
         </label>
         <footer>
           <section className="grid">
-            <button className="secondary">Cancel</button>
+            <Link href="/admin/menu" className="secondary" role="button">
+              Cancel
+            </Link>
             <button type="submit">Create</button>
           </section>
         </footer>

@@ -1,4 +1,5 @@
 import { Menu } from "@/repositories/menu.js";
+import Link from "next/link.js";
 import { redirect } from "next/navigation.js";
 
 export default function DeleteMenuPage({ params: { key } }) {
@@ -18,7 +19,9 @@ export default function DeleteMenuPage({ params: { key } }) {
         <h3>Delete your menu in this page!</h3>
       </hgroup>
       <form action={destroy}>
-        <button className="secondary">Cancel</button>
+        <Link href="/admin/menu" className="secondary" role="button">
+          Cancel
+        </Link>
         <button type="submit">Delete</button>
       </form>
     </main>

@@ -1,4 +1,5 @@
 import { Menu } from "@/repositories/menu.js";
+import Link from "next/link.js";
 import { redirect } from "next/navigation.js";
 
 export default async function UpdateMenuPage({ params: { key } }) {
@@ -63,7 +64,9 @@ export default async function UpdateMenuPage({ params: { key } }) {
         </label>
         <footer>
           <section className="grid">
-            <button className="secondary">Cancel</button>
+            <Link href="/admin/menu" className="secondary" role="button">
+              Cancel
+            </Link>
             <button type="submit">Edit</button>
           </section>
         </footer>
