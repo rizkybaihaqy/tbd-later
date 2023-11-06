@@ -1,12 +1,11 @@
 import { Menu } from "@/repositories/menu.js";
 
-export default async function Menus() {
-  const menu = await Menu.query();
-
-  const grouped = menu.items.reduce(
-    (rows, key, index) =>
-      (index % 3 == 0 ? rows.push([key]) : rows[rows.length - 1].push(key)) &&
-      rows,
+export default async function ListMenusPage() {
+  const menu = (await Menu.query()).items.reduce(
+    (rows, item, index) =>
+      index % 3 === 0
+        ? [...rows, [item]]
+        : [...rows.slice(0, -1), [...rows.slice(-1)[0], item]],
     []
   );
 
@@ -19,7 +18,7 @@ export default async function Menus() {
       <a href={`/admin/menu/create`} role="button" className="primary">
         ➕ Create Menu
       </a>
-      {grouped.map((row, i) => (
+      {menu.map((row, i) => (
         <section key={i} className="grid">
           {row.map((menu, j) => (
             <article key={j}>
