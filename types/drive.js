@@ -1,21 +1,21 @@
 /**
  * @typedef {Object} UploadResponse
- * @property {String} name
- * @property {String} project_id
- * @property {String} drive_name
- * @property {String[]} errors
+ * @property {string} name
+ * @property {string} project_id
+ * @property {string} drive_name
+ * @property {string[]} errors
  */
 
 /**
  * @typedef {Object} ListResponse
  * @property {Object} paging
- * @property {String} paging.size
- * @property {String} paging.last
- * @property {String[]} names
+ * @property {string} paging.size
+ * @property {string} paging.last
+ * @property {string[]} names
  */
 
 /**
  * @typedef {Object} PurgeResponse
- * @property {String[]} deleted
- * @property {String[]} failed
+ * @property {string[]} deleted
+ * @property {string[]} failed
  */

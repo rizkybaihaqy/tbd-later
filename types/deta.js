@@ -5,7 +5,7 @@
  * @property {T[]} processed.items
  * @property {Object} failed
  * @property {T[]} failed.items
- * @property {String[]} errors
+ * @property {string[]} errors
  */
 
 /**
@@ -13,15 +13,15 @@
  * @typedef {Object} UpdateResponse
  * @property {Object} key
  * @property {T} set
- * @property {String[]} errors
+ * @property {string[]} errors
  */
 
 /**
  * @template T
  * @typedef {Object} QueryResponse
  * @property {Object} paging
- * @property {Number} paging.size
- * @property {String} paging.last
+ * @property {number} paging.size
+ * @property {string} paging.last
  * @property {T[]} items
- * @property {String[]} errors
+ * @property {string[]} errors
  */
