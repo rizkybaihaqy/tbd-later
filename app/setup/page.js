@@ -1,4 +1,4 @@
-import { Shop } from "@/repositories/shop.js";
+import { ShopService } from "@/services/shop.js";
 import { redirect } from "next/navigation.js";
 
 export default function Setup() {
@@ -8,17 +8,13 @@ export default function Setup() {
   async function setup(formData) {
     "use server";
 
-    const shop = await Shop.put([
-      {
-        key: "shop",
-        name: formData.get("shop-name"),
-        password: formData.get("password"),
-      },
-    ]);
+    const name = formData.get("shop-name");
+    const password = formData.get("password");
+    const logo = formData.get("logo");
 
-    const image = await Shop.upload("logo.png", formData.get("logo"));
+    const shop = await ShopService.create(name, password, logo);
 
-    if (!shop.failed && image.name) {
+    if (shop.success) {
       redirect("/admin");
     }
   }
