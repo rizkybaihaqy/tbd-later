@@ -1,5 +1,4 @@
 import { Shop } from "@/repositories/shop.js";
-import { revalidateTag } from "next/cache.js";
 import { redirect } from "next/navigation.js";
 
 export default function Setup() {
@@ -20,8 +19,6 @@ export default function Setup() {
     const image = await Shop.upload("logo.png", formData.get("logo"));
 
     if (!shop.failed && image.name) {
-      revalidateTag("shops");
-      revalidateTag("assets");
       redirect("/admin");
     }
   }
