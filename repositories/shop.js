@@ -6,5 +6,6 @@ export const Shop = Deta({
     key: "",
     name: "",
     password: "",
+    logo: "",
   },
 });
