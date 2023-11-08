@@ -1,5 +1,5 @@
-import { ShopService } from "@/services/shop.js";
-import { redirect } from "next/navigation.js";
+import { ShopService } from '@/services/shop.js'
+import { redirect } from 'next/navigation.js'
 
 export default function Setup() {
   /**
@@ -8,14 +8,14 @@ export default function Setup() {
   async function setup(formData) {
     'use server'
 
-    const name = formData.get("shop-name");
-    const password = formData.get("password");
-    const logo = formData.get("logo");
+    const name = formData.get('shop-name')
+    const password = formData.get('password')
+    const logo = formData.get('logo')
 
-    const shop = await ShopService.create(name, password, logo);
+    const shop = await ShopService.create(name, password, logo)
 
     if (shop.success) {
-      redirect("/admin");
+      redirect('/admin')
     }
   }
 
