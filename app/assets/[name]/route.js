@@ -1,12 +1,12 @@
-import { Shop } from "@/repositories/shop.js";
+import { Shop } from '@/repositories/shop.js'
 
 export async function GET(_, { params }) {
-  const asset = await Shop.download(params.name);
+  const asset = await Shop.download(params.name)
 
   return new Response(asset, {
     status: 200,
     headers: {
-      "Content-Type": asset.type,
-    },
-  });
+      'Content-Type': asset.type
+    }
+  })
 }
