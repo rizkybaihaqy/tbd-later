@@ -1,11 +1,11 @@
-import { Deta } from "@/lib/deta/index.js";
+import { Deta } from '@/lib/deta/index.js'
 
 export const Menu = Deta({
-  name: "menus",
+  name: 'menus',
   property: {
-    key: "",
-    name: "",
-    desc: "",
-    price: "",
-  },
-});
+    key: '',
+    name: '',
+    desc: '',
+    price: ''
+  }
+})

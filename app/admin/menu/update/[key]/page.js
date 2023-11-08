@@ -1,76 +1,79 @@
-import { Menu } from "@/repositories/menu.js";
-import Link from "next/link.js";
-import { redirect } from "next/navigation.js";
+import { Menu } from '@/repositories/menu.js'
+import Link from 'next/link.js'
+import { redirect } from 'next/navigation.js'
 
 export default async function UpdateMenuPage({ params: { key } }) {
-  const menu = await Menu.get(key);
+  const menu = await Menu.get(key)
 
   /**
    * @param {FormData} formData
    */
   async function update(formData) {
-    "use server";
+    'use server'
     const menu = await Menu.update(key, {
-      name: formData.get("menu-name"),
-      desc: formData.get("description"),
-      price: formData.get("price"),
-    });
+      name: formData.get('menu-name'),
+      desc: formData.get('description'),
+      price: formData.get('price')
+    })
 
     if (!menu.errors) {
-      redirect("/admin/menu");
+      redirect('/admin/menu')
     }
   }
 
   return (
-    <main className="container">
+    <main className='container'>
       <hgroup>
         <h2>Edit Menu✍🏻</h2>
         <h3>Edit your menu in this page!</h3>
       </hgroup>
       <form action={update}>
-        <label htmlFor="menu-name">
+        <label htmlFor='menu-name'>
           Name
           <input
-            type="text"
-            id="menu-name"
-            name="menu-name"
-            placeholder="Enter menu name"
+            type='text'
+            id='menu-name'
+            name='menu-name'
+            placeholder='Enter menu name'
             required
             defaultValue={menu.name}
           />
         </label>
-        <label htmlFor="description">
+        <label htmlFor='description'>
           Description
           <textarea
             rows={4}
             cols={40}
-            id="description"
-            name="description"
-            placeholder="Enter menu description"
+            id='description'
+            name='description'
+            placeholder='Enter menu description'
             required
             defaultValue={menu.desc}
           />
         </label>
-        <label htmlFor="price">
+        <label htmlFor='price'>
           Price
           <input
-            type="number"
-            id="price"
-            name="price"
-            placeholder="Enter menu price"
+            type='number'
+            id='price'
+            name='price'
+            placeholder='Enter menu price'
             required
             defaultValue={menu.price}
           />
         </label>
         <footer>
-          <section className="grid">
-            <Link href="/admin/menu" className="secondary" role="button">
+          <section className='grid'>
+            <Link
+              href='/admin/menu'
+              className='secondary'
+              role='button'>
               Cancel
             </Link>
-            <button type="submit">Edit</button>
+            <button type='submit'>Edit</button>
           </section>
         </footer>
       </form>
     </main>
-  );
+  )
 }
