@@ -6,7 +6,7 @@ export default function Setup() {
    * @param {FormData} formData
    */
   async function setup(formData) {
-    "use server";
+    'use server'
 
     const name = formData.get("shop-name");
     const password = formData.get("password");
@@ -20,44 +20,44 @@ export default function Setup() {
   }
 
   return (
-    <main className="container">
+    <main className='container'>
       <hgroup>
         <h1>Setup</h1>
         <h2>Lets get started</h2>
       </hgroup>
       <form action={setup}>
-        <label htmlFor="shop-name">
+        <label htmlFor='shop-name'>
           Shop name
           <input
-            type="text"
-            id="shop-name"
-            name="shop-name"
-            placeholder="Example: Mi Tienda"
+            type='text'
+            id='shop-name'
+            name='shop-name'
+            placeholder='Example: Mi Tienda'
             required
           />
         </label>
-        <label htmlFor="logo">
+        <label htmlFor='logo'>
           Logo
           <input
-            type="file"
-            id="logo"
-            name="logo"
-            accept="image/png"
+            type='file'
+            id='logo'
+            name='logo'
+            accept='image/png'
             required
           />
         </label>
-        <label htmlFor="password">
+        <label htmlFor='password'>
           Password
           <input
-            type="password"
-            id="password"
-            name="password"
-            placeholder="Password"
+            type='password'
+            id='password'
+            name='password'
+            placeholder='Password'
             required
           />
         </label>
-        <button type="submit">Continue</button>
+        <button type='submit'>Continue</button>
       </form>
     </main>
-  );
+  )
 }

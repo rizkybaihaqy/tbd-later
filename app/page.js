@@ -11,24 +11,24 @@ export default async function Home() {
   const shop = "data" in response && response.data;
 
   const menus = [
-    ["1", "2", "3"],
-    ["4", "5", "6"],
-    ["7", "8", "9"],
-  ];
+    ['1', '2', '3'],
+    ['4', '5', '6'],
+    ['7', '8', '9']
+  ]
 
   return (
-    <main className="container">
+    <main className='container'>
       <section>
         <Image src={shop.logo} alt="logo" width={100} height={100} />
         <h1>{shop.name}</h1>
       </section>
       {menus.map((menu, i) => (
-        <div className="grid" key={i}>
+        <div className='grid' key={i}>
           {menu.map((item, j) => (
             <article key={j}>{item}</article>
           ))}
         </div>
       ))}
     </main>
-  );
+  )
 }

@@ -1,5 +1,5 @@
-import { Menu } from "@/repositories/menu.js";
-import Link from "next/link.js";
+import { Menu } from '@/repositories/menu.js'
+import Link from 'next/link.js'
 
 export default async function ListMenusPage() {
   const menu = (await Menu.query()).items.reduce(
@@ -8,40 +8,41 @@ export default async function ListMenusPage() {
         ? [...rows, [item]]
         : [...rows.slice(0, -1), [...rows.slice(-1)[0], item]],
     []
-  );
+  )
 
   return (
-    <main className="container">
+    <main className='container'>
       <hgroup>
         <h2>Menu📝</h2>
         <h3>Manage your menu in this page!</h3>
       </hgroup>
-      <Link href={`/admin/menu/create`} role="button" className="primary">
+      <Link
+        href={`/admin/menu/create`}
+        role='button'
+        className='primary'>
         ➕ Create Menu
       </Link>
       {menu.map((row, i) => (
-        <section key={i} className="grid">
+        <section key={i} className='grid'>
           {row.map((menu, j) => (
             <article key={j}>
               <h3>{menu.name}</h3>
               <p>{menu.desc}</p>
               <p>{menu.price}</p>
               <footer>
-                <section className="grid">
+                <section className='grid'>
                   <a
                     href={`/admin/menu/update/${menu.key}`}
-                    role="button"
-                    className="secondary"
-                    data-tooltip="Edit menu"
-                  >
+                    role='button'
+                    className='secondary'
+                    data-tooltip='Edit menu'>
                     ✏️
                   </a>
                   <a
                     href={`/admin/menu/delete/${menu.key}`}
-                    role="button"
-                    className="contrast"
-                    data-tooltip="Delete menu"
-                  >
+                    role='button'
+                    className='contrast'
+                    data-tooltip='Delete menu'>
                     🗑️
                   </a>
                 </section>
@@ -51,5 +52,5 @@ export default async function ListMenusPage() {
         </section>
       ))}
     </main>
-  );
+  )
 }
