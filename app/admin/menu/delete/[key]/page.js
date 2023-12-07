@@ -19,10 +19,12 @@ export default function DeleteMenuPage({ params: { key } }) {
         <h3>Delete your menu in this page!</h3>
       </hgroup>
       <form action={destroy}>
+      <section className="grid">
         <Link href='/admin/menu' className='secondary' role='button'>
           Cancel
         </Link>
         <button type='submit'>Delete</button>
+      </section>
       </form>
     </main>
   )
