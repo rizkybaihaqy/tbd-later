@@ -5,6 +5,10 @@ export const Menu = Deta({
   property: {
     key: '',
     name: '',
+    photo: {
+      filename: '',
+      drive: ''
+    },
     desc: '',
     price: ''
   }

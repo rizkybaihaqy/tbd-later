@@ -1,4 +1,4 @@
-import { Menu } from '@/repositories/menu.js'
+import { MenuService } from '@/services/menu.js'
 import Link from 'next/link.js'
 import { redirect } from 'next/navigation.js'
 
@@ -8,15 +8,15 @@ export default function CreateMenuPage() {
    */
   async function add(formData) {
     'use server'
-    const menu = await Menu.put([
-      {
-        name: formData.get('menu-name'),
-        desc: formData.get('description'),
-        price: formData.get('price')
-      }
-    ])
 
-    if (!menu.failed) {
+    const name = formData.get('menu-name')
+    const photo = formData.get('photo')
+    const desc = formData.get('description')
+    const price = formData.get('price')
+
+    const menu = await MenuService.create(name, photo, desc, price)
+
+    if (menu.success) {
       redirect('/admin/menu')
     }
   }
@@ -35,6 +35,16 @@ export default function CreateMenuPage() {
             id='menu-name'
             name='menu-name'
             placeholder='Enter menu name'
+            required
+          />
+        </label>
+        <label htmlFor='photo'>
+          Photo
+          <input
+            type='file'
+            id='photo'
+            name='photo'
+            accept='image/jpeg'
             required
           />
         </label>
