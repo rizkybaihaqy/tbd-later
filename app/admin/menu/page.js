@@ -1,6 +1,6 @@
-import Link from 'next/link.js'
-import Image from 'next/image.js'
+import Menu from '@/components/menu.js'
 import { MenuService } from '@/services/menu.js'
+import Link from 'next/link.js'
 
 export default async function ListMenusPage() {
   const MenuRes = await MenuService.retrieve('menu')
@@ -18,37 +18,7 @@ export default async function ListMenusPage() {
         className='primary'>
         ➕ Create Menu
       </Link>
-      <section className='grid'>
-        {menu.items.map((item, i) => (
-          <article key={i}>
-            <h2>{item.name}</h2>
-            <Image
-              src={item.photo}
-              alt={item.name}
-              width={300}
-              height={300}
-            />
-            <p>{item.desc}</p>
-            <p>{item.price}</p>
-            <div className='shy'>
-              <a
-                href={`/admin/menu/update/${item.key}`}
-                role='button'
-                className='secondary'
-                data-tooltip='Edit menu'>
-                ✏️
-              </a>
-              <a
-                href={`/admin/menu/delete/${item.key}`}
-                role='button'
-                className='contrast'
-                data-tooltip='Delete menu'>
-                🗑️
-              </a>
-            </div>
-          </article>
-        ))}
-      </section>
+      <Menu items={menu.items}></Menu>
     </main>
   )
 }
