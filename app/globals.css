@@ -3,3 +3,21 @@
 .grid {
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }
+
+article {
+  position: relative;
+}
+
+.shy {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  right: 0;
+  transition: visibility 0s, opacity 0.5s linear;
+}
+
+article:hover > .shy {
+  visibility: visible;
+  opacity: 1;
+}

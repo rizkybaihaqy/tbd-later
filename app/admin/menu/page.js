@@ -30,24 +30,22 @@ export default async function ListMenusPage() {
             />
             <p>{item.desc}</p>
             <p>{item.price}</p>
-            <footer>
-              <section className='grid'>
-                <a
-                  href={`/admin/menu/update/${item.key}`}
-                  role='button'
-                  className='secondary'
-                  data-tooltip='Edit menu'>
-                  ✏️
-                </a>
-                <a
-                  href={`/admin/menu/delete/${item.key}`}
-                  role='button'
-                  className='contrast'
-                  data-tooltip='Delete menu'>
-                  🗑️
-                </a>
-              </section>
-            </footer>
+            <div className='shy'>
+              <a
+                href={`/admin/menu/update/${item.key}`}
+                role='button'
+                className='secondary'
+                data-tooltip='Edit menu'>
+                ✏️
+              </a>
+              <a
+                href={`/admin/menu/delete/${item.key}`}
+                role='button'
+                className='contrast'
+                data-tooltip='Delete menu'>
+                🗑️
+              </a>
+            </div>
           </article>
         ))}
       </section>
