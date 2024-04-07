@@ -5,6 +5,10 @@ export const Shop = Deta({
   property: {
     key: '',
     name: '',
-    password: ''
+    password: '',
+    logo: {
+      filename: '',
+      drive: ''
+    }
   }
 })
