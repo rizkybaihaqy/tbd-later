@@ -1,14 +1,10 @@
-import { Menu } from '@/repositories/menu.js'
 import Link from 'next/link.js'
+import Image from 'next/image.js'
+import { MenuService } from '@/services/menu.js'
 
 export default async function ListMenusPage() {
-  const menu = (await Menu.query()).items.reduce(
-    (rows, item, index) =>
-      index % 3 === 0
-        ? [...rows, [item]]
-        : [...rows.slice(0, -1), [...rows.slice(-1)[0], item]],
-    []
-  )
+  const MenuRes = await MenuService.retrieve('menu')
+  const menu = 'data' in MenuRes && MenuRes.data
 
   return (
     <main className='container'>
@@ -22,35 +18,39 @@ export default async function ListMenusPage() {
         className='primary'>
         ➕ Create Menu
       </Link>
-      {menu.map((row, i) => (
-        <section key={i} className='grid'>
-          {row.map((menu, j) => (
-            <article key={j}>
-              <h3>{menu.name}</h3>
-              <p>{menu.desc}</p>
-              <p>{menu.price}</p>
-              <footer>
-                <section className='grid'>
-                  <a
-                    href={`/admin/menu/update/${menu.key}`}
-                    role='button'
-                    className='secondary'
-                    data-tooltip='Edit menu'>
-                    ✏️
-                  </a>
-                  <a
-                    href={`/admin/menu/delete/${menu.key}`}
-                    role='button'
-                    className='contrast'
-                    data-tooltip='Delete menu'>
-                    🗑️
-                  </a>
-                </section>
-              </footer>
-            </article>
-          ))}
-        </section>
-      ))}
+      <section className='grid'>
+        {menu.items.map((item, i) => (
+          <article key={i}>
+            <h2>{item.name}</h2>
+            <Image
+              src={item.photo}
+              alt={item.name}
+              width={300}
+              height={300}
+            />
+            <p>{item.desc}</p>
+            <p>{item.price}</p>
+            <footer>
+              <section className='grid'>
+                <a
+                  href={`/admin/menu/update/${item.key}`}
+                  role='button'
+                  className='secondary'
+                  data-tooltip='Edit menu'>
+                  ✏️
+                </a>
+                <a
+                  href={`/admin/menu/delete/${item.key}`}
+                  role='button'
+                  className='contrast'
+                  data-tooltip='Delete menu'>
+                  🗑️
+                </a>
+              </section>
+            </footer>
+          </article>
+        ))}
+      </section>
     </main>
   )
 }
