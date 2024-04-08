@@ -18,7 +18,7 @@ export default async function ListMenusPage() {
         className='primary'>
         ➕ Create Menu
       </Link>
-      <Menu items={menu.items}></Menu>
+      <Menu items={menu.items} />
     </main>
   )
 }
