@@ -1,20 +1,27 @@
-import { Category } from '@/repositories/category.js'
+import { MenuService } from '@/services/menu.js'
 import Link from 'next/link.js'
-import { redirect } from 'next/navigation.js'
+import { notFound, redirect } from 'next/navigation.js'
 
 export default async function UpdateCategoryPage({ params: { key } }) {
-  const category = await Category.get(key)
+  const categoryRes = await MenuService.retrieveCategory(key)
+  if (!categoryRes.success) {
+    notFound()
+  }
+
+  const category = 'data' in categoryRes && categoryRes.data
 
   /**
    * @param {FormData} formData
    */
   async function update(formData) {
     'use server'
-    const category = await Category.update(key, {
-      name: formData.get('category-name')
-    })
 
-    if (!category.errors) {
+    const category = await MenuService.editCategory(
+      key,
+      formData.get('category-name')
+    )
+
+    if (category.success) {
       redirect('/admin/category')
     }
   }

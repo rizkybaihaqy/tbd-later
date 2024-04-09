@@ -57,6 +57,41 @@ export const MenuService = {
         errors
       })),
 
+  retrieveCategory: (key) =>
+    Menu.get(key)
+      .then((menu) =>
+        !menu.category ? Promise.reject('Category not found') : menu
+      )
+      .then((menu) => ({ key: menu.key, name: menu.category }))
+      .then((category) => ({
+        success: true,
+        message: 'Category retrieved successfully',
+        data: category
+      }))
+      .catch((errors) => ({
+        success: false,
+        message: 'Category retrieval failed',
+        errors
+      })),
+
+  editCategory: (key, name) =>
+    Menu.update(key, 'set', { category: name })
+      .then((categories) =>
+        categories.errors
+          ? Promise.reject(categories.errors)
+          : categories
+      )
+      .then((categories) => ({
+        success: true,
+        message: 'Categories updated successfully',
+        data: categories.set
+      }))
+      .catch((errors) => ({
+        success: false,
+        message: 'Categories update failed',
+        errors
+      })),
+
   addMenu: (category, name, photo, desc, price) =>
     Menu.query([{ category }])
       .then((menu) =>
