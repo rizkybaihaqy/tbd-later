@@ -1,14 +1,9 @@
-import { Category } from '@/repositories/category.js'
+import { MenuService } from '@/services/menu.js'
 import Link from 'next/link.js'
 
 export default async function ListCategoriesPage() {
-  const category = (await Category.query()).items.reduce(
-    (rows, item, index) =>
-      index % 3 === 0
-        ? [...rows, [item]]
-        : [...rows.slice(0, -1), [...rows.slice(-1)[0], item]],
-    []
-  )
+  const CategoriesRes = await MenuService.retrieveCategories()
+  const categories = 'data' in CategoriesRes && CategoriesRes.data
 
   return (
     <main className='container'>
@@ -22,33 +17,29 @@ export default async function ListCategoriesPage() {
         className='primary'>
         ➕ Create Category
       </Link>
-      {category.map((row, i) => (
-        <section key={i} className='grid'>
-          {row.map((category, j) => (
-            <article key={j}>
-              <h3>{category.name}</h3>
-              <footer>
-                <section className='grid'>
-                  <a
-                    href={`/admin/category/update/${category.key}`}
-                    role='button'
-                    className='secondary'
-                    data-tooltip='Edit category'>
-                    ✏️
-                  </a>
-                  <a
-                    href={`/admin/category/delete/${category.key}`}
-                    role='button'
-                    className='contrast'
-                    data-tooltip='Delete category'>
-                    🗑️
-                  </a>
-                </section>
-              </footer>
-            </article>
-          ))}
-        </section>
-      ))}
+      <section className='grid'>
+        {categories.map((category, i) => (
+          <article key={i}>
+            <h3>{category.name}</h3>
+            <div className='shy'>
+              <a
+                href={`/admin/category/update/${category.key}`}
+                role='button'
+                className='secondary'
+                data-tooltip='Edit category'>
+                ✏️
+              </a>
+              <a
+                href={`/admin/category/delete/${category.key}`}
+                role='button'
+                className='contrast'
+                data-tooltip='Delete category'>
+                🗑️
+              </a>
+            </div>
+          </article>
+        ))}
+      </section>
     </main>
   )
 }

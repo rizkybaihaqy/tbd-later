@@ -46,8 +46,8 @@ export default async function CreateMenuPage() {
           Category
           <select id='category' name='category' required>
             {categories.map((category, i) => (
-              <option key={i} value={category}>
-                {category}
+              <option key={i} value={category.name}>
+                {category.name}
               </option>
             ))}
           </select>

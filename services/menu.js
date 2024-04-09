@@ -17,7 +17,12 @@ export const MenuService = {
 
   retrieveCategories: () =>
     Menu.query()
-      .then((menu) => menu.items.map((item) => item.category))
+      .then((menu) =>
+        menu.items.map((item) => ({
+          key: item.key,
+          name: item.category
+        }))
+      )
       .then((categories) => ({
         success: true,
         message: 'Categories retrieved successfully',
