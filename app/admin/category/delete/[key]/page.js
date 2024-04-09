@@ -1,15 +1,21 @@
-import { Category } from '@/repositories/category.js'
+import { MenuService } from '@/services/menu.js'
 import Link from 'next/link.js'
-import { redirect } from 'next/navigation.js'
+import { notFound, redirect } from 'next/navigation.js'
 
-export default function DeleteCategoryPage({ params: { key } }) {
-  /**
-   * @param {FormData} _
-   */
+export default async function DeleteCategoryPage({ params: { key } }) {
+  const categoryRes = await MenuService.retrieveCategory(key)
+  if (!categoryRes.success) {
+    notFound()
+  }
+
   async function destroy(_) {
     'use server'
-    await Category.delete(key)
-    redirect('/admin/category')
+
+    const category = await MenuService.destroy(key)
+
+    if (category.success) {
+      redirect('/admin/category')
+    }
   }
 
   return (
@@ -19,8 +25,11 @@ export default function DeleteCategoryPage({ params: { key } }) {
         <h3>Delete your category in this page!</h3>
       </hgroup>
       <form action={destroy}>
-        <section className="grid">
-          <Link href='/admin/category' className='secondary' role='button'>
+        <section className='grid'>
+          <Link
+            href='/admin/category'
+            className='secondary'
+            role='button'>
             Cancel
           </Link>
           <button type='submit'>Delete</button>

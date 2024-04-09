@@ -92,6 +92,28 @@ export const MenuService = {
         errors
       })),
 
+  destroy: (key) =>
+    Menu.get(key)
+      .then((menu) =>
+        !menu.category ? Promise.reject('Category not found') : menu
+      )
+      .then((menu) =>
+        menu.items.length !== 0
+          ? Promise.reject('Category is not empty')
+          : menu
+      )
+      .then((menu) => Menu.delete(menu.key))
+      .then((menu) => ({
+        success: true,
+        message: 'Category deleted successfully',
+        data: menu
+      }))
+      .catch((errors) => ({
+        success: false,
+        message: 'Category deletion failed',
+        errors
+      })),
+
   addMenu: (category, name, photo, desc, price) =>
     Menu.query([{ category }])
       .then((menu) =>
