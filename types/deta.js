@@ -13,6 +13,10 @@
  * @typedef {Object} UpdateResponse
  * @property {Object} key
  * @property {T} set
+ * @property {T} increment
+ * @property {T} append
+ * @property {T} prepend
+ * @property {T} delete
  * @property {string[]} errors
  */
 

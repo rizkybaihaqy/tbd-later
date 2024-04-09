@@ -2,23 +2,37 @@ import { MenuService } from '@/services/menu.js'
 import Link from 'next/link.js'
 import { redirect } from 'next/navigation.js'
 
-export default function CreateMenuPage() {
+export default async function CreateMenuPage() {
   /**
    * @param {FormData} formData
    */
   async function add(formData) {
     'use server'
 
+    const category = formData.get('category')
     const name = formData.get('menu-name')
     const photo = formData.get('photo')
     const desc = formData.get('description')
     const price = formData.get('price')
 
-    const menu = await MenuService.create(name, photo, desc, price)
+    const menu = await MenuService.addMenu(
+      category,
+      name,
+      photo,
+      desc,
+      price
+    )
 
     if (menu.success) {
       redirect('/admin/menu')
     }
+  }
+
+  const CategoriesRes = await MenuService.retrieveCategories()
+  const categories = 'data' in CategoriesRes && CategoriesRes.data
+
+  if (categories.length === 0) {
+    redirect('/admin/category/create')
   }
 
   return (
@@ -28,6 +42,16 @@ export default function CreateMenuPage() {
         <h3>Create your menu in this page!</h3>
       </hgroup>
       <form action={add}>
+        <label htmlFor='category'>
+          Category
+          <select id='category' name='category' required>
+            {categories.map((category, i) => (
+              <option key={i} value={category}>
+                {category}
+              </option>
+            ))}
+          </select>
+        </label>
         <label htmlFor='menu-name'>
           Name
           <input
