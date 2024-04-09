@@ -121,12 +121,22 @@ export const MenuService = {
           ? Promise.reject('Category not found')
           : menu
       )
+      .then((menu) => menu.items[0])
       .then((menu) =>
-        Menu.update(menu.items[0].key, 'append', {
+        Promise.all([menu, Menu.upload(`${name}.jpeg`, photo)])
+      )
+      .then(([menu, upload]) =>
+        upload.errors ? Promise.reject(upload.errors) : [menu, upload]
+      )
+      .then(([menu, photo]) =>
+        Menu.update(menu.key, 'append', {
           items: [
             {
               name,
-              photo: `${ASSET_URL}/${photo}`,
+              photo: {
+                filename: photo.name,
+                drive: photo.drive_name
+              },
               desc,
               price
             }
