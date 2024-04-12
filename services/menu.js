@@ -5,6 +5,16 @@ export const MenuService = {
   retrieve: () =>
     Menu.query()
       .then((menu) => ({
+        ...menu,
+        items: menu.items.map((category) => ({
+          ...category,
+          items: category.items.map((item) => ({
+            ...item,
+            photo: `${ASSET_URL}/${item.photo.drive}/${item.photo.filename}`
+          }))
+        }))
+      }))
+      .then((menu) => ({
         success: true,
         message: 'Menu retrieved successfully',
         data: menu

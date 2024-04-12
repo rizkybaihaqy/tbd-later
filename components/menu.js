@@ -68,12 +68,12 @@ export default function Menu({ items: init }) {
                 onDragOver={(e) => handleDragOver(e)}
                 onDrop={() => handleDrop(categoryIndex, itemIndex)}>
                 <h2>{item.name}</h2>
-                {/* <Image
-                src={item.photo}
-                alt={item.name}
-                width={300}
-                height={300}
-              /> */}
+                <Image
+                  src={item.photo}
+                  alt={item.name}
+                  width={300}
+                  height={300}
+                />
                 <p>{item.desc}</p>
                 <p>{item.price}</p>
                 <div className='shy'>
