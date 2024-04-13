@@ -4,8 +4,17 @@ export const Menu = Deta({
   name: 'menus',
   property: {
     key: '',
-    name: '',
-    desc: '',
-    price: ''
+    category: '',
+    items: [
+      {
+        name: '',
+        photo: {
+          filename: '',
+          drive: ''
+        },
+        desc: '',
+        price: ''
+      }
+    ]
   }
 })

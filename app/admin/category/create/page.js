@@ -1,4 +1,4 @@
-import { Category } from '@/repositories/category.js'
+import { MenuService } from '@/services/menu.js'
 import Link from 'next/link.js'
 import { redirect } from 'next/navigation.js'
 
@@ -8,13 +8,11 @@ export default function CreateCategoryPage() {
    */
   async function add(formData) {
     'use server'
-    const category = await Category.put([
-      {
-        name: formData.get('category-name')
-      }
-    ])
+    const category = await MenuService.createCategories(
+      formData.get('category-name')
+    )
 
-    if (!category.failed) {
+    if (category.success) {
       redirect('/admin/category')
     }
   }
