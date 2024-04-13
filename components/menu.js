@@ -29,7 +29,7 @@ export default function Menu({ items: init }) {
     }
   }
 
-  const handleDrop = (categoryIndex, itemIndex) => {
+  const handleDrop = async (categoryIndex, itemIndex) => {
     if (draggedItem === null) return
     if (
       draggedCategoryIndex !== categoryIndex ||
@@ -46,6 +46,32 @@ export default function Menu({ items: init }) {
         0,
         draggedItem
       )
+
+      const changes = [
+        {
+          key: newCategories[draggedCategoryIndex].key,
+          items: newCategories[draggedCategoryIndex].items
+        }
+      ]
+
+      if (draggedCategoryIndex !== categoryIndex) {
+        changes.push({
+          key: newCategories[categoryIndex].key,
+          items: newCategories[categoryIndex].items
+        })
+      }
+
+      const res = await fetch('/admin/menu/update', {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(changes)
+      })
+
+      if (!res.ok) {
+        return
+      }
 
       setCategories(newCategories)
     }

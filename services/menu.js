@@ -154,5 +154,21 @@ export const MenuService = {
         success: false,
         message: 'Menu addition failed',
         errors
+      })),
+
+  reorderMenus: (key, items) =>
+    Menu.update(key, 'set', { items })
+      .then((menu) =>
+        menu.errors ? Promise.reject(menu.errors) : menu
+      )
+      .then((menu) => ({
+        success: true,
+        message: 'Menu reordered successfully',
+        data: menu.set
+      }))
+      .catch((errors) => ({
+        success: false,
+        message: 'Menu reorder failed',
+        errors
       }))
 }
