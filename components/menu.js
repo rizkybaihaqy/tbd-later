@@ -1,4 +1,5 @@
 'use client'
+import { toSrc } from '@/lib/index.js'
 import Image from 'next/image.js'
 import { useState } from 'react'
 
@@ -69,7 +70,7 @@ export default function Menu({ items: init }) {
                 onDrop={() => handleDrop(categoryIndex, itemIndex)}>
                 <h2>{item.name}</h2>
                 <Image
-                  src={item.photo}
+                  src={toSrc(item.photo)}
                   alt={item.name}
                   width={300}
                   height={300}

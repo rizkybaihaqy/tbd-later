@@ -1,4 +1,3 @@
-import { ASSET_URL } from '@/config/app.js'
 import { Shop } from '@/repositories/shop.js'
 
 export const ShopService = {
@@ -50,10 +49,6 @@ export const ShopService = {
       .then((shop) =>
         !shop.name ? Promise.reject(['Shop not found']) : shop
       )
-      .then((shop) => ({
-        ...shop,
-        logo: `${ASSET_URL}/${shop.logo.drive}/${shop.logo.filename}`
-      }))
       .then((shop) => ({
         success: true,
         message: 'Shop retrieved successfully',
