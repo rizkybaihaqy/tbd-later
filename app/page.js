@@ -1,4 +1,5 @@
 import { toSrc } from '@/lib/index.js'
+import { MenuService } from '@/services/menu.js'
 import { ShopService } from '@/services/shop.js'
 import Image from 'next/image.js'
 import { redirect } from 'next/navigation.js'
@@ -8,14 +9,13 @@ export default async function Home() {
   if (!response.success && 'errors' in response) {
     redirect('/setup')
   }
-
   const shop = 'data' in response && response.data
 
-  const menus = [
-    ['1', '2', '3'],
-    ['4', '5', '6'],
-    ['7', '8', '9']
-  ]
+  const MenuRes = await MenuService.retrieve('menu')
+  if (!MenuRes.success && 'errors' in MenuRes) {
+    redirect('/setup')
+  }
+  const menu = 'data' in MenuRes && MenuRes.data
 
   return (
     <main className='container'>
@@ -28,12 +28,42 @@ export default async function Home() {
         />
         <h1>{shop.name}</h1>
       </section>
-      {menus.map((menu, i) => (
-        <div className='grid' key={i}>
-          {menu.map((item, j) => (
-            <article key={j}>{item}</article>
-          ))}
-        </div>
+      {menu.items.map((category) => (
+        <section key={category.key}>
+          <h2>{category.category}</h2>
+          <div className='grid'>
+            {category.items.map((item, itemIndex) => (
+              <article key={itemIndex}>
+                <header>
+                  <h2>{item.name}</h2>
+                </header>
+                <section className='grid'>
+                  <div>
+                    <p>{item.desc}</p>
+                    <p>
+                      {new Intl.NumberFormat('id-ID', {
+                        style: 'currency',
+                        currency: 'IDR',
+                        maximumFractionDigits: 0
+                      }).format(item.price)}
+                    </p>
+                  </div>
+                  <figure>
+                    <Image
+                      src={toSrc(item.photo)}
+                      alt={item.name}
+                      width={100}
+                      height={100}
+                    />
+                  </figure>
+                </section>
+                <footer>
+                  <button>Order</button>
+                </footer>
+              </article>
+            ))}
+          </div>
+        </section>
       ))}
     </main>
   )

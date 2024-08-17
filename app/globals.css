@@ -4,6 +4,11 @@
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }
 
+article > section.grid {
+  display: grid;
+  grid-template-columns: .7fr .3fr;
+}
+
 article {
   position: relative;
 }
