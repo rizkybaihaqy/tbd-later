@@ -34,7 +34,7 @@ export default async function Home() {
         {menu.items.map((category) => (
           <section key={category.key}>
             <h2>{category.category}</h2>
-            <div className='grid'>
+            <div className='grid grid-3'>
               {category.items.map((item, itemIndex) => (
                 <article key={itemIndex}>
                   <header>

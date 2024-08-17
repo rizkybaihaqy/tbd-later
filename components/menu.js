@@ -81,10 +81,28 @@ export default function Menu({ items: init }) {
 
   return (
     <>
+      <style jsx>{`
+        article {
+          position: relative;
+        }
+
+        .toolbar {
+          visibility: hidden;
+          opacity: 0;
+          position: absolute;
+          top: 0;
+          right: 0;
+        }
+
+        article:hover > .toolbar {
+          visibility: visible;
+          opacity: 1;
+        }
+      `}</style>
       {categories.map((category, categoryIndex) => (
         <section key={category.key}>
           <h2>{category.category}</h2>
-          <div className='grid'>
+          <div className='grid grid-3'>
             {category.items.map((item, itemIndex) => (
               <article
                 key={itemIndex}
@@ -103,7 +121,7 @@ export default function Menu({ items: init }) {
                 />
                 <p>{item.desc}</p>
                 <p>{item.price}</p>
-                <div className='shy'>
+                <div className='toolbar'>
                   <a
                     href={`/admin/menu/update/${item.key}`}
                     role='button'
