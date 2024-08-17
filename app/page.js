@@ -1,6 +1,6 @@
 import Checkout from '@/components/checkout.js'
 import Order from '@/components/order.js'
-import { toSrc } from '@/lib/index.js'
+import { toRp, toSrc } from '@/lib/index.js'
 import { MenuService } from '@/services/menu.js'
 import { ShopService } from '@/services/shop.js'
 import Image from 'next/image.js'
@@ -43,13 +43,7 @@ export default async function Home() {
                   <section className='grid'>
                     <div>
                       <p>{item.desc}</p>
-                      <p>
-                        {new Intl.NumberFormat('id-ID', {
-                          style: 'currency',
-                          currency: 'IDR',
-                          maximumFractionDigits: 0
-                        }).format(item.price)}
-                      </p>
+                      <p>{toRp(item.price)}</p>
                     </div>
                     <figure>
                       <Image

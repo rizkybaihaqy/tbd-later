@@ -1,4 +1,5 @@
 'use client'
+import { toRp } from '@/lib/index.js'
 import { useLocalStorage } from '@uidotdev/usehooks'
 
 export default function Checkout({ item }) {
@@ -19,11 +20,7 @@ export default function Checkout({ item }) {
         transform: 'translate(-50%, 0)',
         width: 'calc(100% - 2rem)'
       }}>
-      {new Intl.NumberFormat('id-ID', {
-        style: 'currency',
-        currency: 'IDR',
-        maximumFractionDigits: 0
-      }).format(total)}
+      {toRp(total)}
     </a>
   )
 }

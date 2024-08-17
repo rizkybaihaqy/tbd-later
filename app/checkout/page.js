@@ -18,13 +18,7 @@ export default function Checkout() {
               <section className='grid'>
                 <div>
                   <h3>{order.name}</h3>
-                  <p>
-                    {new Intl.NumberFormat('id-ID', {
-                      style: 'currency',
-                      currency: 'IDR',
-                      maximumFractionDigits: 0
-                    }).format(order.price)}
-                  </p>
+                  <p>{toRp(order.price)}</p>
                 </div>
                 <figure>
                   <Image

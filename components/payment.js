@@ -1,10 +1,10 @@
 'use client'
+import { toRp } from '@/lib/index.js'
 import { useLocalStorage, useToggle } from '@uidotdev/usehooks'
 
 export default function Payment({ item }) {
   const [orders, _] = useLocalStorage('orders', [])
   const [open, toggle] = useToggle()
-
   const total = orders.reduce(
     (acc, order) => acc + parseInt(order.price) * order.quantity,
     0
@@ -23,11 +23,7 @@ export default function Payment({ item }) {
           transform: 'translate(-50%, 0)',
           width: 'calc(100% - 2rem)'
         }}>
-        {new Intl.NumberFormat('id-ID', {
-          style: 'currency',
-          currency: 'IDR',
-          maximumFractionDigits: 0
-        }).format(total)}
+        {toRp(total)}
       </button>
       <dialog open={open}>
         <article>

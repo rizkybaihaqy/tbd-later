@@ -1,5 +1,5 @@
 'use client'
-import { toSrc } from '@/lib/index.js'
+import { toRp, toSrc } from '@/lib/index.js'
 import Image from 'next/image.js'
 import { useState } from 'react'
 
@@ -120,7 +120,7 @@ export default function Menu({ items: init }) {
                   height={300}
                 />
                 <p>{item.desc}</p>
-                <p>{item.price}</p>
+                <p>{toRp(item.price)}</p>
                 <div className='toolbar'>
                   <a
                     href={`/admin/menu/update/${item.key}`}
